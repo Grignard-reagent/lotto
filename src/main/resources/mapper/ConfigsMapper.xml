@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lab.lotto.mapper.ConfigsMapper">
+    <!-- 插入配置 -->
+    <insert id="insert" parameterType="com.lab.lotto.entity.Configs" useGeneratedKeys="true" keyProperty="cid">
+        INSERT INTO lottery_configs (
+            cname,
+            cdetails,
+            cstatus,
+            create_time,
+            update_time
+        ) VALUES (
+            #{cname},
+            #{cdetails},
+            #{cstatus},
+            #{ccreateTime},
+            #{cupdateTime}
+        )
+    </insert>
+
+    <!-- 更新配置 -->
+    <update id="update" parameterType="com.lab.lotto.entity.Configs">
+        UPDATE lottery_configs
+        SET cname = #{cname},
+            cdetails = #{cdetails},
+            cstatus = #{cstatus},
+            update_time = #{cupdateTime}
+        WHERE cid = #{cid}
+    </update>
+
+    <!-- 根据ID删除配置 -->
+    <delete id="delete">
+        DELETE FROM lottery_configs WHERE cid = #{cid}
+    </delete>
+
+    <!-- 根据ID查询配置 -->
+    <select id="selectById" resultType="com.lab.lotto.entity.Configs">
+        SELECT * FROM lottery_configs WHERE cid = #{cid}
+    </select>
+
+    <!-- 查询所有配置 -->
+    <select id="selectAll" resultType="com.lab.lotto.entity.Configs">
+        SELECT * FROM lottery_configs
+    </select>
+
+    <!-- 根据名称查询配置 -->
+    <select id="selectByName" resultType="com.lab.lotto.entity.Configs">
+        SELECT * FROM lottery_configs WHERE cname = #{cname}
+    </select>
+
+    <!-- 根据状态查询配置 -->
+    <select id="selectByStatus" resultType="com.lab.lotto.entity.Configs">
+        SELECT * FROM lottery_configs WHERE cstatus = #{cstatus}
+    </select>
+</mapper> 

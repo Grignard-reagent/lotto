@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lab.lotto.mapper.MessageMapper">
+    <!-- 插入消息 -->
+    <insert id="insert" parameterType="com.lab.lotto.entity.Message" useGeneratedKeys="true" keyProperty="mid">
+        INSERT INTO messagequeue (
+            mtype,
+            mcontent,
+            mstatus,
+            mretry,
+            create_time,
+            update_time
+        ) VALUES (
+            #{mtype},
+            #{mcontent},
+            #{mstatus},
+            #{mretry},
+            #{createTime},
+            #{updateTime}
+        )
+    </insert>
+
+    <!-- 根据ID查询消息 -->
+    <select id="selectById" resultType="com.lab.lotto.entity.Message">
+        SELECT * FROM messagequeue WHERE mid = #{mid}
+    </select>
+
+    <!-- 查询待处理消息 -->
+    <select id="selectPendingMessages" resultType="com.lab.lotto.entity.Message">
+        SELECT * FROM messagequeue WHERE mstatus = 0
+    </select>
+
+    <!-- 查询失败消息 -->
+    <select id="selectFailedMessages" resultType="com.lab.lotto.entity.Message">
+        SELECT * FROM messagequeue
+        WHERE mstatus = 3
+        AND mretry &lt; 3
+        AND next_retry_time &lt;= NOW()
+    </select>
+
+    <!-- 更新消息状态 -->
+    <update id="updateStatus" parameterType="com.lab.lotto.entity.Message">
+        UPDATE messagequeue
+        SET mstatus = #{mstatus},
+            mretry = #{mretry},
+            update_time = #{updateTime},
+            next_retry_time = #{nextRetryTime},
+            merror = #{merror}
+        WHERE mid = #{mid}
+    </update>
+</mapper> 

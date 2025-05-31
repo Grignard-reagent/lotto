@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lab.lotto.mapper.DrawFrequencyMapper">
+    <!-- 更新抽奖频率记录 -->
+    <update id="update" parameterType="com.lab.lotto.entity.DrawFrequency">
+        UPDATE drawfrequency
+        SET uid = #{uid},
+            drawTime = #{drawTime},
+            drawCount = #{drawCount},
+            timeWindow = #{timeWindow},
+            updateTime = #{updateTime}
+        WHERE fid = #{fid}
+    </update>
+
+    <!-- 删除抽奖频率记录 -->
+    <delete id="delete">
+        DELETE FROM drawfrequency WHERE fid = #{fid}
+    </delete>
+
+    <!-- 根据ID查询抽奖频率记录 -->
+    <select id="selectById" resultType="com.lab.lotto.entity.DrawFrequency">
+        SELECT * FROM drawfrequency WHERE fid = #{fid}
+    </select>
+
+    <!-- 查询所有抽奖频率记录 -->
+    <select id="selectAll" resultType="com.lab.lotto.entity.DrawFrequency">
+        SELECT * FROM drawfrequency
+    </select>
+
+    <!-- 根据用户ID查询抽奖频率记录 -->
+    <select id="selectByUid" resultType="com.lab.lotto.entity.DrawFrequency">
+        SELECT * FROM drawfrequency WHERE uid = #{uid}
+    </select>
+
+    <!-- 根据时间窗口查询抽奖频率记录 -->
+    <select id="selectByTimeWindow" resultType="com.lab.lotto.entity.DrawFrequency">
+        SELECT * FROM drawfrequency WHERE timeWindow = #{timeWindow}
+    </select>
+
+    <!-- 根据时间范围查询抽奖频率记录 -->
+    <select id="selectByTimeRange" resultType="com.lab.lotto.entity.DrawFrequency">
+        SELECT * FROM drawfrequency
+        WHERE drawTime BETWEEN #{startTime} AND #{endTime}
+    </select>
+
+    <!-- 统计用户在指定时间窗口内的抽奖次数 -->
+    <select id="countByUserAndTimeWindow" resultType="int">
+        SELECT COUNT(*) FROM drawfrequency
+        WHERE uid = #{uid}
+        AND timeWindow = #{timeWindow}
+        AND drawTime &lt;= #{currentTime}
+    </select>
+
+    <!-- 统计用户的总抽奖次数 -->
+    <select id="countByUid" resultType="int">
+        SELECT COUNT(*) FROM drawfrequency WHERE uid = #{uid}
+    </select>
+</mapper> 

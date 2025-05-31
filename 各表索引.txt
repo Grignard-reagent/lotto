@@ -1,0 +1,41 @@
+blacklist 表
+索引名：idx_uid，索引字段：uid（升序）
+索引名：idx_expire_time，索引字段：expireTime（升序）
+索引名：index_blacklist_btype，索引字段：btype（升序）
+configs 表
+索引名：index_configs_cname，索引字段：cname（升序）
+索引名：index_configs_cstatus，索引字段：cstatus（升序）
+drawfrequency 表
+索引名：idx_uid，索引字段：uid（升序）, timeWindow（升序）
+索引名：idx_draw_time，索引字段：drawTime（升序）
+drawstrategy 表
+索引名：idx_draw_strategy_type，索引字段：stype（升序）
+索引名：idx_draw_strategy_name，索引字段：sname（升序）
+messageprocesslog 表
+索引名：idx_mid，索引字段：mid（升序）
+索引名：idx_process_time，索引字段：process_time（升序）
+索引名：idx_messageprocesslog_lstatus，索引字段：lstatus（升序）
+messagequeue 表
+索引名：index_messagequeue_mtype，索引字段：mtype（升序）
+索引名：idx_messagequeue_mstatus，索引字段：mstatus（升序）
+索引名：idx_messagequeue_create_time，索引字段：create_time（升序）
+索引名：idx_messagequeue_retry_time，索引字段：next_retry_time（升序）
+prize 表
+索引名：idx_prize_type，索引字段：ptype（升序）
+索引名：idx_prize_status，索引字段：pstatus（升序）
+索引名：index_prize_pname，索引字段：pname（升序）
+record 表
+索引名：idx_uid，索引字段：uid（升序）
+索引名：idx_pid，索引字段：pid（升序）
+索引名：idx_create_time，索引字段：create_time（升序）
+索引名：index_record_dtype&dsl，索引字段：dtype（升序）, dstatus（升序）
+strategyprize_cooperation 表
+索引名：strategyprize_cooperation_ibfk_2，索引字段：pid（升序）
+索引名：index_strategy_coopercation_sid&pid，索引字段：sid（升序）, pid（升序）
+system_config 表
+索引名：index_system_config_key，索引字段：ckey（升序）
+索引名：index_record_dtype&dstatus，索引字段：ctype（升序）, cstatus（升序）
+user 表
+索引名：idx_user_uname，索引字段：uname（升序）
+索引名：idx_user_stuid，索引字段：stuid（升序）
+索引名：idx_user_urole，索引字段：urole（升序）

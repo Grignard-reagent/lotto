@@ -1,0 +1,105 @@
+blacklist 表
+ bid：int，主键，自增长，黑名单ID
+ uid：int，用户ID，不可空
+ btype：varchar(50)，黑名单类型，不可空
+ breason：varchar(255)，加入原因，不可空
+ createTime：datetime，创建时间，不可空
+ expireTime：datetime，过期时间，可空
+
+configs 表
+ cid：int，主键，自增长，配置ID
+ cname：varchar(100)，配置名称，不可空
+ cdetails：text，配置详情，不可空
+ cstatus：int，配置状态（0  禁用，1  启用），不可空
+ createTime：datetime，创建时间，不可空
+ updateTime：datetime，更新时间，不可空
+ dlimitQ：int，单时间窗口最大抽奖次数，不可空
+ dleast：text，保底奖触发条件，可空
+
+drawfrequency 表
+ fid：int，主键，自增长，频率记录ID
+ uid：int，用户ID，不可空
+ drawTime：datetime，抽奖时间，不可空
+ drawCount：int，抽奖次数，不可空
+ timeWindow：varchar(10)，时间窗口标识，不可空
+ createTime：datetime，创建时间，不可空
+ updateTime：datetime，更新时间，不可空
+
+drawstrategy 表
+ sid：int，主键，自增长，策略ID
+ sname：varchar(100)，策略名称，不可空
+ stype：int，策略类型标识（1  权重抽奖，2  普通抽奖），不可空
+ description：text，策略描述，可空
+ createTime：datetime，创建时间，不可空
+ updateTime：datetime，更新时间，不可空
+
+messageprocesslog 表
+ lid：bigint，主键，自增长，日志ID
+ mid：bigint，消息ID，不可空
+ lstatus：tinyint，处理状态（0  失败，1  成功），不可空
+ process_time：datetime，处理时间，不可空
+ lresult：varchar(500)，处理结果，可空
+ lerror：varchar(500)，错误信息，可空
+
+messagequeue 表
+ mid：bigint，主键，自增长，消息ID
+ mtype：varchar(50)，消息类型，不可空
+ mcontent：text，消息内容，不可空
+ mstatus：tinyint，状态（0  待处理，1  处理中，2  处理成功，3  处理失败），不可空
+ mretry：int，重试次数，不可空
+ create_time：datetime，创建时间，不可空
+ update_time：datetime，更新时间，不可空
+ next_retry_time：datetime，下次重试时间，可空
+ merror：varchar(500)，错误信息，可空
+
+prize 表
+ pid：int，主键，自增长，奖品ID
+ pname：varchar(100)，奖品名称，不可空
+ ptype：varchar(50)，奖品类型，不可空
+ ptotalQ：int，奖品总数量，不可空
+ pnowQ：int，当前可用数量，不可空
+ pwinP：decimal(5, 4)，中奖概率，不可空
+ pstatus：varchar(20)，奖品状态，不可空
+ pweight：double，权重（用于权重抽奖），可空
+ createTime：datetime，创建时间，不可空
+ updateTime：datetime，更新时间，不可空
+ punluckyyduck：tinyint，是否保底奖（0  否，1  是），可空
+ pdesc：varchar(500)，奖品描述，可空
+ pimage：varchar(200)，奖品图片，可空
+
+record 表
+ rid：int，主键，自增长，记录ID
+ uid：int，用户ID，不可空
+ pid：int，奖品ID，不可空
+ dtype：tinyint，抽奖类型（1  普通抽奖，2  活动抽奖），不可空
+ dstatus：tinyint，记录状态（0  未中奖，1  已中奖，2  已领取），不可空
+ create_time：datetime，创建时间，不可空
+ update_time：datetime，更新时间，不可空
+
+strategyprize_cooperation 表
+ coid：int，主键，自增长，关联ID
+ sid：int，策略ID，不可空
+ pid：int，奖品ID，不可空
+ pweight：double，权重（仅权重抽奖使用），可空
+ pprobability：decimal(5, 4)，中奖概率（仅普通抽奖使用），可空
+ createTime：datetime，创建时间，不可空
+ updateTime：datetime，更新时间，不可空
+
+system_config 表
+ cid：int，主键，自增长，配置ID
+ ckey：varchar(50)，配置键，不可空
+ cvalue：varchar(500)，配置值，不可空
+ cdesc：varchar(200)，配置描述，可空
+ ctype：tinyint，配置类型（1  系统配置，2  业务配置，3  其他配置），不可空
+ cstatus：tinyint，配置状态（0  禁用，1  启用），不可空
+ create_time：datetime，创建时间，不可空
+ update_time：datetime，更新时间，不可空
+
+user 表
+ uid：int，主键，自增长，用户ID
+ stuid：int，学号，不可空
+ uname：varchar(50)，用户名称，不可空
+ upassword：varchar(100)，用户密码，不可空
+ urole：varchar(20)，用户角色，不可空
+ createTime：datetime，创建时间，不可空
+ updateTime：datetime，更新时间，不可空 

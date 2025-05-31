@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lab.lotto.mapper.MessageProcessLogMapper">
+    <!-- 根据消息ID查询处理日志 -->
+    <select id="selectByMessageId" resultType="com.lab.lotto.entity.MessageProcessLog">
+        SELECT * FROM messageprocesslog
+        WHERE mid = #{mid}
+        ORDER BY process_time DESC
+    </select>
+
+    <!-- 查询失败日志 -->
+    <select id="selectFailedLogs" resultType="com.lab.lotto.entity.MessageProcessLog">
+        SELECT * FROM messageprocesslog
+        WHERE lstatus = 0
+        AND process_time &lt; #{expireTime}
+    </select>
+
+    <!-- 删除过期日志 -->
+    <delete id="deleteExpired">
+        DELETE FROM messageprocesslog
+        WHERE process_time &lt; #{expireTime}
+    </delete>
+
+    <!-- 更新日志 -->
+    <update id="updateLog">
+        UPDATE messageprocesslog
+        SET lstatus = #{status},
+            lresult = #{result},
+            lerror = #{error},
+            process_time = #{processTime}
+        WHERE lid = #{lid}
+    </update>
+</mapper> 
